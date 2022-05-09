@@ -21,7 +21,7 @@ def make_new_book():
     # Indicate we want the DB to save and commit collected changes
     db.session.commit()
 
-    return make_response(f"Book {new_book.title} successfully created", 201)
+    return make_response(jsonify(f"Book {new_book.title} successfully created"), 201)
 
 @books_bp.route("", methods = ["GET"])
 def get_all_books():
@@ -64,7 +64,7 @@ def update_book(book_id):
 
     db.session.commit()
 
-    return make_response(f"Book {book_id} successfully updated", 200)
+    return make_response(jsonify(f"Book {book_id} successfully updated"), 200)
 
 @books_bp.route("/<book_id>", methods = ["DELETE"])
 def delete_book(book_id):
@@ -73,6 +73,6 @@ def delete_book(book_id):
     db.session.delete(book)
     db.session.commit()
 
-    return make_response(f"Book #{book_id} was successfully deleted", 200)
+    return make_response(jsonify(f"Book #{book_id} was successfully deleted"), 200)
 
 

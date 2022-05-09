@@ -12,7 +12,7 @@ load_dotenv()
 def create_app(test_config=None):
     app = Flask(__name__)
 
-    # Connects to either development or teting DB
+    # Connects to either development or testing DB
     if not test_config:
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
@@ -28,7 +28,11 @@ def create_app(test_config=None):
     from .routes import books_bp
     app.register_blueprint(books_bp)
 
+    from .author_routes import authors_bp
+    app.register_blueprint(authors_bp)
+
     # Makes models visible to our app
     from app.models.book import Book
+    from app.models.author import Author
 
     return app
