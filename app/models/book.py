@@ -11,6 +11,15 @@ class Book(db.Model):
     genres = db.relationship("Genre", secondary = "book_genre", back_populates = "books")
 
     def to_json(self):
-        return {"id": self.id, 
+        book_dict =  {"id": self.id, 
                 "title": self.title, 
                 "description": self.description}
+
+        if self.author:
+            book_dict["author"] = self.author.name
+        
+        if self.genres:
+            genre_names = [genre.name for genre in self.genres]
+            book_dict["genres"] = genre_names
+
+        return book_dict
