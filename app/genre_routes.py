@@ -52,4 +52,10 @@ def make_new_book(genre_id):
 
 @genre_bp.route("/<genre_id>/books", methods = ["GET"])
 def get_books(genre_id):
-    pass
+    genre = check_genre_exists(genre_id)
+
+    books_response = []
+    for book in genre.books:
+        books_response.append(book.to_json())
+    
+    return jsonify(books_response), 200
