@@ -31,8 +31,12 @@ def create_app(test_config=None):
     from .author_routes import authors_bp
     app.register_blueprint(authors_bp)
 
+    from .genre_routes import genre_bp
+    app.register_blueprint(genre_bp)
+
     # Makes models visible to our app
     from app.models.book import Book
     from app.models.author import Author
+    from app.models.genre import Genre
 
     return app
